@@ -9,8 +9,9 @@
     "mongoose": "^5.9.25"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
+    "eslint": "^7.5.0",
     "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
 }

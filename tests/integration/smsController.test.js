@@ -20,7 +20,7 @@ describe('It should test smsController endpoints', () => {
   test('Should respond status code 404 for an invalid entry', async () => {
     const response = await request(app)
       .post('/sms')
-      .send({ sms: 'Caça-Palavra$' })
+      .send({ sms: 123 })
     expect(response.statusCode).toBe(400)
   })
 

@@ -1,9 +1,8 @@
 const { Router } = require('express')
+const smsController = require('../src/app/controllers/smsController')
 
 const router = new Router()
 
-router.get('/home', (req, res) => {
-  return res.json({ result: 'It works' })
-})
+router.post('/sms', smsController.convertSms)
 
 module.exports = router

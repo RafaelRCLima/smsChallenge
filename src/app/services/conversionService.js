@@ -32,10 +32,10 @@ let conversionService = {
 
   async convertNumberToText(numberSequence) {
 
-    numberSequenceList = numberSequence.split('')
+    const numberSequenceList = numberSequence.split('')
 
     let sequencesOfEqualNumbers = []
-    let auxiliar = ''
+    let auxiliary = ''
 
     numberSequenceList.forEach(function (numberValue, index) {
 
