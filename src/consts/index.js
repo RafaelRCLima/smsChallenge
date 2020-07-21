@@ -1,4 +1,4 @@
-const letters = [
+const smsLettersList = [
   'abc',
   'def',
   'ghi',
@@ -9,4 +9,4 @@ const letters = [
   'wxyz'
 ]
 
-module.exports = letters
+module.exports = smsLettersList
