@@ -1,7 +1,9 @@
 const smsLettersList = require('../../consts')
 
 let conversionService = {
+
   async convertTextToNumber(text) {
+
     const lettersList = text.split('')
     let result = ''
 
@@ -26,7 +28,49 @@ let conversionService = {
     })
 
     return result
+  },
+
+  async convertNumberToText(numberSequence) {
+
+    numberSequenceList = numberSequence.split('')
+
+    let sequencesOfEqualNumbers = []
+    let auxiliar = ''
+
+    numberSequenceList.forEach(function (numberValue, index) {
+
+      if (numberValue === ' ') {
+        sequencesOfEqualNumbers.push(numberValue)
+      }
+
+      if (numberValue !== numberSequenceList[index - 1]) {
+        auxiliary = numberValue
+        if (numberValue !== numberSequenceList[index + 1]) {
+          sequencesOfEqualNumbers.push(numberValue)
+        }
+      }
+
+      if (numberValue === numberSequenceList[index + 1]) {
+        auxiliary += numberSequenceList[index + 1]
+      } 
+      else {
+        if (numberValue != auxiliary) sequencesOfEqualNumbers.push(auxiliary)
+      }
+    })
+
+    let result = ''
+    sequencesOfEqualNumbers.forEach(function (value) {
+
+      if (value !== '0' && value !== '_') {
+        result += smsLettersList[parseInt(value[0]) - 2][value.length - 1]
+      }
+      if (value === '0') result += ' '
+
+    })
+
+    return result
   }
+  
 }
 
 module.exports = conversionService
