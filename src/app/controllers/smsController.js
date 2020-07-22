@@ -1,9 +1,18 @@
 const conversionService = require('../services/conversionService')
 const smsService = require('../services/smsService')
+const Yup = require('yup')
 
 let smsController = {
   async convertSms (req, res) {
     try {
+
+      let schema = Yup.object().shape({
+        sms: Yup.string().required()
+      });
+
+      if (!(await schema.isValid(req.body))) {
+        return res.status(400).json({ error: "Please insert a sms text ou number" })
+      }
       
       if(parseInt(req.body.sms[0])) {
 
