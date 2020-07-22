@@ -1,5 +1,6 @@
 const app = require ('../../src/app')
 const request = require ('supertest')
+const mongoose = require ('mongoose')
 
 describe('It should test smsController endpoints', () => {
 
@@ -28,5 +29,10 @@ describe('It should test smsController endpoints', () => {
     const response = await request(app)
       .get('/sms')
     expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(11)
   })
+})
+
+afterAll(async () => {
+  await mongoose.connection.close()
 })
