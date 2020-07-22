@@ -4,13 +4,23 @@ const smsService = require('../services/smsService')
 let smsController = {
   async convertSms (req, res) {
     try {
+      
       if(parseInt(req.body.sms[0])) {
+
         const result = await conversionService.convertNumberToText(req.body.sms)
+
+        if (result.length > 255) return res.json({ 
+          error: 'Please insert 255 or less caracters'
+        })
 
         smsService.create(req.body.sms, result)
         
         return res.status(200).json(result)
       }
+
+      if (req.body.sms.length > 255) return res.json({ 
+        error: 'Please insert 255 or less caracters'
+      })
 
       const result = await conversionService.convertTextToNumber(req.body.sms)
 
@@ -24,8 +34,14 @@ let smsController = {
   },
 
   async listSms (req, res) {
+
     try{
-      const { page = 1 } = req.query
+      const { page = 1, date } = req.query
+
+      if (date) {
+        const listOfSms = await smsService.listByDate(page, date)
+        return res.status(200).json(listOfSms)
+      }
 
       const listOfSms = await smsService.list(page)
 
