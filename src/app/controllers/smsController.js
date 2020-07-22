@@ -1,5 +1,4 @@
 const conversionService = require('../services/conversionService')
-const Sms = require('../model/sms')
 
 let smsController = {
   async convertSms (req, res) {

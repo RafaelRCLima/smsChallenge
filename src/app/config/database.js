@@ -6,6 +6,10 @@ const mongooseOptions = {
   useUnifiedTopology: true
 }
 
-Mongoose.connect('mongodb://localhost:27017/avaliacaoSMS', mongooseOptions)
+Mongoose.connect(
+  process.NODE_ENV === 'test' ? 'mongodb://localhost:27017/test' : 
+  'mongodb://localhost:27017/avaliacaoSMS', 
+  mongooseOptions
+  )
 
 module.exports = Mongoose
