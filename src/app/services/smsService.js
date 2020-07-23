@@ -19,7 +19,6 @@ let smsService = {
     const listOfSmsByDate = []
 
     const listOfSms = await Sms.find()
-    const skip = (page - 1) * 10
 
     listOfSms.forEach(function (entry) {
       if (moment(date).format('DD/MM/YYYY') === moment(entry.createdAt).format('DD/MM/YYYY')) {
@@ -28,6 +27,7 @@ let smsService = {
     })
 
     const listToSend = []
+    const skip = (page - 1) * 10
 
     listOfSmsByDate.forEach(function (entry, index) {
       if (skip <= index && listOfSmsByDate.length < 10){

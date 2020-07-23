@@ -31,6 +31,13 @@ describe('It should test smsController endpoints', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body.length).toBeLessThan(11)
   })
+
+  test("Should list converted SMS's by date", async () => {
+    const response = await request(app)
+      .get('/listSms?date=2020-07-23')
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(11)
+  })
 })
 
 afterAll(async () => {

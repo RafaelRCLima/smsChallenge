@@ -4,6 +4,7 @@ const Yup = require('yup')
 const moment = require('moment')
 
 let smsController = {
+
   async convertSms (req, res) {
     try {
 
@@ -12,14 +13,14 @@ let smsController = {
       });
 
       if (!(await schema.isValid(req.body))) {
-        return res.status(400).json({ error: "Please insert a sms text ou number" })
+        return res.status(400).json({ error: "Please insert a sms text or number" })
       }
       
       if(parseInt(req.body.sms[0])) {
 
         const result = await conversionService.convertNumberToText(req.body.sms)
 
-        if (result.length > 255) return res.json({ 
+        if (result.length > 255) return res.status(400).json({ 
           error: 'Please insert 255 or less caracters'
         })
 
@@ -32,14 +33,14 @@ let smsController = {
         })
       }
 
-      if (req.body.sms.length > 255) return res.json({ 
+      if (req.body.sms.length > 255) return res.status(400).json({ 
         error: 'Please insert 255 or less caracters'
       })
 
       const result = await conversionService.convertTextToNumber(req.body.sms)
 
       const { original, converted, createdAt } = await smsService.create(req.body.sms, result)
-        
+
       return res.status(200).json({
         original,
         converted,
@@ -47,7 +48,7 @@ let smsController = {
       })
 
     } catch (err) {
-      return res.status(400).json({ error: 'An error has ocurred' })
+      return res.status(500).json({ error: 'An intern error has ocurred' })
     }
   },
 
@@ -67,7 +68,7 @@ let smsController = {
       return res.status(200).json(listOfSms)
       
     } catch (err) {
-      return res.status(400).json({ error: 'It was not possible to find any data' })
+      return res.status(500).json({ error: 'An intern error has ocurred' })
     }
     
   }
