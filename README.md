@@ -38,6 +38,8 @@ precisa ser enviada como query param em conjunto com a página na url ('localhos
 
 ## Testes
 
-Para executar os testes implementados é preciso ter o NodeJs instalado localmente assim como o MongoDB em container Docker. 
+Para executar os testes implementados é preciso ter o NodeJs instalado localmente assim como o MongoDB em container Docker.
+
 Em primeiro lugar deve-se executar o comando 'yarn install' (ou 'npm install' dependendo do gerenciador de pacotes).
+
 A aplicação já disponibiliza um container mongo (fica disponível após executar 'docker-compose up' pela primeira vez) que pode ser utilizado para os testes, nesse caso será preciso executar 'docker start mongo' antes e depois o comando de testes apropriado, como exemplo, este projeto utilizou o Yarn como gerenciador de pacotes, então o comando, nesse caso, é 'yarn test'.
