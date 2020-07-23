@@ -3,11 +3,10 @@ const moment = require('moment')
 
 let smsService = {
   async create (originalSms, convertedSms) {
-    const sms = await new Sms({
+    const sms = await Sms.create({
       original: originalSms,
       converted: convertedSms
     })
-    await sms.save()
     return sms
   },
 
@@ -22,15 +21,21 @@ let smsService = {
     const listOfSms = await Sms.find()
     const skip = (page - 1) * 10
 
-    listOfSms.forEach(function (entry, index) {
+    listOfSms.forEach(function (entry) {
       if (moment(date).format('DD/MM/YYYY') === moment(entry.createdAt).format('DD/MM/YYYY')) {
-        if (skip <= index && listOfSmsByDate.length < 10){
-          listOfSmsByDate.push(entry)
-        }
+        listOfSmsByDate.push(entry)
       }
     })
 
-    return listOfSmsByDate
+    const listToSend = []
+
+    listOfSmsByDate.forEach(function (entry, index) {
+      if (skip <= index && listOfSmsByDate.length < 10){
+        listToSend.push(entry)
+      }
+    })
+
+    return listToSend
   }
 }
 

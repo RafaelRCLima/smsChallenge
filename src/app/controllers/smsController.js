@@ -1,6 +1,7 @@
 const conversionService = require('../services/conversionService')
 const smsService = require('../services/smsService')
 const Yup = require('yup')
+const moment = require('moment')
 
 let smsController = {
   async convertSms (req, res) {
@@ -22,9 +23,13 @@ let smsController = {
           error: 'Please insert 255 or less caracters'
         })
 
-        smsService.create(req.body.sms, result)
+        const { original, converted, createdAt } = await smsService.create(req.body.sms, result)
         
-        return res.status(200).json(result)
+        return res.status(200).json({
+          original,
+          converted,
+          date: moment(createdAt).format('DD/MM/YYYY')
+        })
       }
 
       if (req.body.sms.length > 255) return res.json({ 
@@ -33,9 +38,13 @@ let smsController = {
 
       const result = await conversionService.convertTextToNumber(req.body.sms)
 
-      smsService.create(req.body.sms, result)
-
-      return res.status(200).json(result)
+      const { original, converted, createdAt } = await smsService.create(req.body.sms, result)
+        
+      return res.status(200).json({
+        original,
+        converted,
+        date: moment(createdAt).format('DD/MM/YYYY')
+      })
 
     } catch (err) {
       return res.status(400).json({ error: 'An error has ocurred' })
@@ -49,6 +58,7 @@ let smsController = {
 
       if (date) {
         const listOfSms = await smsService.listByDate(page, date)
+
         return res.status(200).json(listOfSms)
       }
 
