@@ -21,7 +21,7 @@ let smsService = {
     const listOfSms = await Sms.find()
 
     listOfSms.forEach(function (entry) {
-      if (moment(date).format('DD/MM/YYYY') === moment(entry.createdAt).format('DD/MM/YYYY')) {
+      if (date === moment(entry.createdAt).format('YYYY-MM-DD')) {
         listOfSmsByDate.push(entry)
       }
     })
@@ -30,12 +30,22 @@ let smsService = {
     const skip = (page - 1) * 10
 
     listOfSmsByDate.forEach(function (entry, index) {
-      if (skip <= index && listOfSmsByDate.length < 10){
+      if (skip <= index && listToSend.length < 10){
         listToSend.push(entry)
       }
     })
 
     return listToSend
+  },
+
+  async formatSmsList(list) {
+    const finalList = []
+
+    list.map(function (value){
+      finalList.push(value.toClient())
+    })
+
+    return finalList
   }
 }
 

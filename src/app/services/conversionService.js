@@ -36,11 +36,15 @@ let conversionService = {
 
     let sequencesOfEqualNumbers = []
     let auxiliary = ''
+    let error = false
 
     numberSequenceList.forEach(function (numberValue, index) {
 
-      if (numberValue === ' ') {
+      if (numberValue === '1') error = true
+
+      if (numberValue === '0') {
         sequencesOfEqualNumbers.push(numberValue)
+        return
       }
 
       if (numberValue !== numberSequenceList[index - 1]) {
@@ -58,15 +62,20 @@ let conversionService = {
       }
     })
 
+    if (error) return []
+
     let result = ''
     sequencesOfEqualNumbers.forEach(function (value) {
 
       if (value !== '0' && value !== '_') {
+        if(!smsLettersList[parseInt(value[0]) - 2][value.length - 1]) error = true
         result += smsLettersList[parseInt(value[0]) - 2][value.length - 1]
       }
       if (value === '0') result += ' '
 
     })
+
+    if (error) return []
 
     return result
   }
