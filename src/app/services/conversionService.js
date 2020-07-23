@@ -36,8 +36,11 @@ let conversionService = {
 
     let sequencesOfEqualNumbers = []
     let auxiliary = ''
+    let error = false
 
     numberSequenceList.forEach(function (numberValue, index) {
+
+      if (numberValue === '1') error = true
 
       if (numberValue === ' ') {
         sequencesOfEqualNumbers.push(numberValue)
@@ -57,6 +60,8 @@ let conversionService = {
         if (numberValue != auxiliary) sequencesOfEqualNumbers.push(auxiliary)
       }
     })
+
+    if (error) return []
 
     let result = ''
     sequencesOfEqualNumbers.forEach(function (value) {
