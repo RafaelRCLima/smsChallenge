@@ -35,6 +35,13 @@ describe('It should test smsController endpoints', () => {
       .send({ sms: 123 })
     expect(response.statusCode).toBe(400)
   })
+  
+  test('Should respond status code 404 for an invalid entry', async () => {
+    const response = await request(app)
+      .post('/convertSms')
+      .send({ sms: '444444' })
+    expect(response.statusCode).toBe(400)
+  })
 
   test("Should list all converted SMS's", async () => {
     const response = await request(app)

@@ -19,13 +19,14 @@ let smsController = {
       if(parseInt(req.body.sms[0]) || parseInt(req.body.sms.toString()[0])) {
 
         const result = await conversionService.convertNumberToText(req.body.sms.toString())
-        
+  
         if (result.length > 255) return res.status(400).json({ 
           error: 'Please insert 255 or less caracters'
         })
 
         if (result.length < 1) return res.status(400).json({
-          error: "The number '1' isn't allowed, please insert a number sequence without it."
+          error: "Sorry, your conversion can't be done. Please, make sure you're sending the correct number format.",
+          tip: "The numbers '7' and '9' are the only ones that can have a sequence of four, the other are limited by three. Number '1' is out. Please follow the example for the text 'table test' = '82_2255533083377778'"
         })
 
         const { original, converted, createdAt } = await smsService.create(req.body.sms, result)

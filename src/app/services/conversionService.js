@@ -42,8 +42,9 @@ let conversionService = {
 
       if (numberValue === '1') error = true
 
-      if (numberValue === ' ') {
+      if (numberValue === '0') {
         sequencesOfEqualNumbers.push(numberValue)
+        return
       }
 
       if (numberValue !== numberSequenceList[index - 1]) {
@@ -67,11 +68,14 @@ let conversionService = {
     sequencesOfEqualNumbers.forEach(function (value) {
 
       if (value !== '0' && value !== '_') {
+        if(!smsLettersList[parseInt(value[0]) - 2][value.length - 1]) error = true
         result += smsLettersList[parseInt(value[0]) - 2][value.length - 1]
       }
       if (value === '0') result += ' '
 
     })
+
+    if (error) return []
 
     return result
   }
