@@ -57,7 +57,7 @@ Em primeiro lugar deve-se executar o comando:
 ```
 $ yarn install
 ```
-Ou 'npm install' dependendo do gerenciador de pacotes).
+Ou 'npm install' dependendo do gerenciador de pacotes.
 
 A aplicação já disponibiliza um container mongo (fica disponível após executar 'docker-compose up' pela primeira vez) que pode ser utilizado para os testes, nesse caso será preciso executar 'docker start mongo' antes e depois o comando de testes apropriado, como exemplo, este projeto utilizou o Yarn como gerenciador de pacotes, então o comando é esse:
 ```
