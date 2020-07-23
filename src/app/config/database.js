@@ -9,7 +9,7 @@ const mongooseOptions = {
 }
 
 Mongoose.connect(
-  process.env.NODE_ENV === 'test' ? 'mongodb://localhost:27017/test' : 'mongodb://localhost:27017/avaliacaoSMS', 
+  process.env.NODE_ENV === 'test' ? 'mongodb://localhost:27017/test' : 'mongodb://mongo:27017/avaliacaoSMS', 
   mongooseOptions
 )
 .then(() => console.log('MongoDB Connected'))
