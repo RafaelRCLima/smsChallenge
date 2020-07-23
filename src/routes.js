@@ -3,7 +3,7 @@ const smsController = require('../src/app/controllers/smsController')
 
 const router = new Router()
 
-router.post('/sms', smsController.convertSms)
-router.get('/sms', smsController.listSms)
+router.post('/convertSms', smsController.convertSms)
+router.get('/listSms', smsController.listSms)
 
 module.exports = router
