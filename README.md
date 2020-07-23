@@ -5,7 +5,7 @@
 Criação de uma API em Node.JS que converta textos digitados para os respectivos números que deveriam ser digitados quando não se tem a 
 possibilidade de utilizar teclado QWERTY, assim como converter os números digitados para o texto correspondente.
 
-O enunciado completo do desafio se encontra neste [link](https://gist.github.com/PauloLuan/2f0a6a878c80b96a088ab52e28d4be14)
+O enunciado completo do desafio se encontra neste [link](https://gist.github.com/PauloLuan/2f0a6a878c80b96a088ab52e28d4be14).
 
 ## Tecnologias utilizadas
 
